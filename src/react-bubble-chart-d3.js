@@ -210,11 +210,15 @@ export default class BubbleChart extends Component {
 
     // Center the texts inside the circles.
 
-    d3.selectAll("tspan").attr("x", function(d) {
-      const self = d3.select(this);
-      const width = self.node().getBBox().width;
-      return -(width/2);
-    })
+      d3.selectAll("tspan").attr("x", function (d) {
+          const self = d3.select(this);
+          const width = self.node().getBBox().width;
+          let div = 2;
+          if (d.data.label.indexOf("\n") !== -1 && typeof window.navigator !== "undefined" && window.navigator.userAgent.indexOf("iPhone") !== -1) {
+              div = 4;
+          }
+          return -(width / div);
+      })
     d3.selectAll(".label-text").attr("x", function(d) {
       const self = d3.select(this);
       const width = self.node().getBBox().width;
